@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -20,6 +21,9 @@ abstract class BaseFragment: Fragment() {
     abstract val layoutResID: Int
 
     abstract fun inject()
+
+    @StringRes
+    open val baseTitle: Int? = null
 
     fun appComponent(): ApplicationComponent = DaggerApplication[context].appComponent
 
@@ -40,7 +44,18 @@ abstract class BaseFragment: Fragment() {
 
         unbinder?.unbind()
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        baseTitle?.let { setTitle(getString(it)) }
+    }
+
+    protected fun setTitle(title: CharSequence) {
+        activity?.apply {
+            if (!isFinishing)
+                setTitle(title)
+        }
+    }
 
 }
 

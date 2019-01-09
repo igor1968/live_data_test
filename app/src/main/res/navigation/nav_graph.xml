@@ -6,16 +6,14 @@
 
     <fragment
         android:id="@+id/catalogueFragment"
-        android:name="com.igordanilchik.livedatatest.flows.catalogue.view.CatalogueFragment"
-        android:label="CatalogueFragment">
+        android:name="com.igordanilchik.livedatatest.flows.catalogue.view.CatalogueFragment">
         <action
             android:id="@+id/to_offersFragment"
             app:destination="@id/offersFragment"/>
     </fragment>
     <fragment
         android:id="@+id/offersFragment"
-        android:name="com.igordanilchik.livedatatest.flows.offers.view.OffersFragment"
-        android:label="OffersFragment">
+        android:name="com.igordanilchik.livedatatest.flows.offers.view.OffersFragment">
         <action
             android:id="@+id/to_offerFragment"
             app:destination="@id/offerFragment"/>
@@ -23,11 +21,13 @@
             android:name="categoryId"
             argType="integer"
             android:defaultValue="0"/>
+        <argument
+            android:name="categoryName"
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/offerFragment"
-        android:name="com.igordanilchik.livedatatest.flows.offer.view.OfferFragment"
-        android:label="OfferFragment">
+        android:name="com.igordanilchik.livedatatest.flows.offer.view.OfferFragment">
         <argument
             android:name="offerId"
             argType="integer"
@@ -35,6 +35,5 @@
     </fragment>
     <fragment
         android:id="@+id/locationFragment"
-        android:name="com.igordanilchik.livedatatest.flows.location.view.LocationFragment"
-        android:label="LocationFragment"/>
+        android:name="com.igordanilchik.livedatatest.flows.location.view.LocationFragment"/>
 </navigation>

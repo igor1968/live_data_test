@@ -17,7 +17,7 @@ class CatalogueViewModel @Inject constructor(
     private val repository: IRepository
 ) : ViewModel() {
 
-    private val selectedIdLiveData = MutableLiveData<Event<Int>>()
+    private val selectedIdLiveData = MutableLiveData<Event<SelectedCategory>>()
 
     private val mediatorLiveData = MediatorLiveData<Resource<Categories>>()
 
@@ -28,11 +28,11 @@ class CatalogueViewModel @Inject constructor(
     val categories: LiveData<Resource<Categories>>
         get() = mediatorLiveData
 
-    val navigateToCategory: LiveData<Event<Int>>
+    val navigateToCategory: LiveData<Event<SelectedCategory>>
         get() = selectedIdLiveData
 
     fun onCategoryClicked(category: Categories.Category) {
-        selectedIdLiveData.value = Event(category.id)
+        selectedIdLiveData.value = Event(SelectedCategory(id = category.id, name = category.name))
     }
 
     fun onRefresh() {

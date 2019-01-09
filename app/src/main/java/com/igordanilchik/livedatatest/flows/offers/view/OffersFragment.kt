@@ -53,6 +53,10 @@ class OffersFragment : BaseFragment(), OffersView, OffersAdapter.OffersCallback 
         )
 
         val id = arguments?.let { OffersFragmentArgs.fromBundle(it).categoryId } ?: 0
+        val name = arguments?.let { OffersFragmentArgs.fromBundle(it).categoryName }
+
+        name?.let { setTitle(it) }
+
         viewModel.offers(id).observe(this, Observer { result ->
             when (result.status) {
                 Status.SUCCESS -> {

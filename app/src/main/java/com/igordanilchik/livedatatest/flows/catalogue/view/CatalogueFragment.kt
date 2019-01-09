@@ -18,6 +18,7 @@ import com.igordanilchik.livedatatest.common.mvvm.view.BaseFragment
 import com.igordanilchik.livedatatest.data.Categories
 import com.igordanilchik.livedatatest.data.Status
 import com.igordanilchik.livedatatest.flows.catalogue.viewmodel.CatalogueViewModel
+import com.igordanilchik.livedatatest.flows.catalogue.viewmodel.SelectedCategory
 import com.igordanilchik.livedatatest.ui.adapter.CategoriesAdapter
 import javax.inject.Inject
 
@@ -41,6 +42,8 @@ class CatalogueFragment : BaseFragment(), CatalogueView, CategoriesAdapter.Categ
     }
 
     override val layoutResID = R.layout.fragment_catalogue
+
+    override val baseTitle = R.string.farfor_title
 
     override fun inject() {
         appComponent().inject(this)
@@ -130,8 +133,9 @@ class CatalogueFragment : BaseFragment(), CatalogueView, CategoriesAdapter.Categ
         emptyStateContainer.visibility = View.GONE
     }
 
-    override fun goToCategory(id: Int) {
-        val directions = CatalogueFragmentDirections.toOffersFragment().setCategoryId(id)
+    override fun goToCategory(selectedCategory: SelectedCategory) {
+        val directions = CatalogueFragmentDirections.toOffersFragment(selectedCategory.name)
+            .setCategoryId(selectedCategory.id)
         view?.findNavController()?.navigate(directions)
     }
 }
