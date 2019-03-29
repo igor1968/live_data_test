@@ -85,9 +85,11 @@ class OfferFragment : BaseFragment(), OfferView {
     }
 
     override fun showProgress() {
+        swipe_container.post { swipe_container.isRefreshing = true }
     }
 
     override fun hideProgress() {
+        swipe_container.post { swipe_container.isRefreshing = false }
     }
 
     override fun showError(message: String?) =

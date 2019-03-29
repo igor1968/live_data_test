@@ -24,7 +24,7 @@ abstract class BaseViewHolder<ITEM_TYPE, CALLBACK_TYPE>(
     fun bindView(item: ITEM_TYPE?) {
         this.item = item
 
-        if (item != null) {
+        item?.let {
             if (parentDelegate != null) {
                 mvpDelegate?.apply {
                     onSaveInstanceState()
@@ -40,7 +40,7 @@ abstract class BaseViewHolder<ITEM_TYPE, CALLBACK_TYPE>(
                 }
             }
 
-            render(item)
+            render(it)
         }
     }
 
