@@ -12,11 +12,11 @@ import com.igordanilchik.livedatatest.ui.base.adapter.holder.BaseViewHolder
  * @author Igor Danilchik
  */
 class OffersAdapter(
-        offers: Offers,
-        private val callback: OffersCallback?
-): BaseAdapter<BaseViewHolder<Offers.Offer, OffersAdapter.OffersCallback>, Offers.Offer>(
-        offers.offers,
-        null
+    offers: Offers,
+    private val callback: OffersCallback?
+) : BaseAdapter<BaseViewHolder<Offers.Offer, OffersAdapter.OffersCallback>, Offers.Offer>(
+    offers.offers,
+    null
 ) {
 
     override val adapterID: String = OffersAdapter::class.java.simpleName
@@ -26,8 +26,6 @@ class OffersAdapter(
 
         return OffersViewHolder(v, null, callback)
     }
-
-
 
     interface OffersCallback {
         fun onOfferClicked(offer: Offers.Offer)

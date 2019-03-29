@@ -2,25 +2,21 @@ package com.igordanilchik.livedatatest.ui.base.adapter.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.ButterKnife
 import com.arellomobile.mvp.MvpDelegate
+import kotlinx.android.extensions.LayoutContainer
 
 /**
  * @author Igor Danilchik
  */
 abstract class BaseViewHolder<ITEM_TYPE, CALLBACK_TYPE>(
-    itemView: View,
+    override val containerView: View,
     private val parentDelegate: MvpDelegate<*>?,
     protected var callback: CALLBACK_TYPE?
-) : RecyclerView.ViewHolder(itemView), IBaseViewHolder<ITEM_TYPE> {
+) : RecyclerView.ViewHolder(containerView), IBaseViewHolder<ITEM_TYPE>, LayoutContainer {
 
     private var mvpDelegate: MvpDelegate<out BaseViewHolder<*, *>>? = null
 
     protected var item: ITEM_TYPE? = null
-
-    init {
-        ButterKnife.bind(this, itemView)
-    }
 
     /**
      * We can use presenter after call this method

@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.igordanilchik.livedatatest.app.DaggerApplication
 import com.igordanilchik.livedatatest.common.di.ApplicationComponent
 
@@ -15,8 +13,6 @@ import com.igordanilchik.livedatatest.common.di.ApplicationComponent
  * @author Igor Danilchik
  */
 abstract class BaseFragment: Fragment() {
-
-    private var unbinder: Unbinder? = null
 
     abstract val layoutResID: Int
 
@@ -32,18 +28,9 @@ abstract class BaseFragment: Fragment() {
         inject()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(layoutResID, container, false)
-        unbinder = ButterKnife.bind(this, view)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(layoutResID, container, false)
 
-        return view
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        unbinder?.unbind()
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

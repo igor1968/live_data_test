@@ -6,15 +6,12 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import butterknife.BindView
 import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -23,6 +20,7 @@ import com.igordanilchik.livedatatest.R
 import com.igordanilchik.livedatatest.common.di.ViewModelFactory
 import com.igordanilchik.livedatatest.common.mvvm.view.BaseFragment
 import com.igordanilchik.livedatatest.flows.location.viewmodel.LocationViewModel
+import kotlinx.android.synthetic.main.fragment_location.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,11 +28,6 @@ import javax.inject.Inject
  * @author Igor Danilchik
  */
 class LocationFragment : BaseFragment(), LocationView {
-
-    @BindView(R.id.map_view)
-    lateinit var mapView: MapView
-    @BindView(R.id.address)
-    lateinit var address: TextView
 
     private var map: GoogleMap? = null
 
@@ -60,19 +53,19 @@ class LocationFragment : BaseFragment(), LocationView {
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
+        map_view.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        mapView.onPause()
+        map_view.onPause()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         MapsInitializer.initialize(activity)
-        mapView.onCreate(savedInstanceState)
+        map_view.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
@@ -96,7 +89,7 @@ class LocationFragment : BaseFragment(), LocationView {
     }
 
     override fun requestMap() =
-        mapView.getMapAsync {
+        map_view.getMapAsync {
             map = it
             requestPermissions()
         }
