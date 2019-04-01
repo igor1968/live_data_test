@@ -14,8 +14,7 @@ interface ClientApi {
     fun loadCatalogue(@Query("key") key: String): LiveData<ApiResponse<Catalogue>>
 
     companion object {
-
-        val API_BASE_URL = "http://ufa.farfor.ru"
-        val API_KEY = "ukAXxeJYZN"
+        const val API_BASE_URL = "http://ufa.farfor.ru"
+        const val API_KEY = "ukAXxeJYZN"
     }
 }

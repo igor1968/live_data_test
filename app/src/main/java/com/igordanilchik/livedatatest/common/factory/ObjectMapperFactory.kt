@@ -14,14 +14,13 @@ object ObjectMapperFactory {
     @JvmStatic
     fun newInstance(): ObjectMapper {
         val objectMapper = ObjectMapper()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true)
+            .setSerializationInclusion(JsonInclude.Include.NON_NULL)
 
         objectMapper
-                .registerModule(KotlinModule())
+            .registerModule(KotlinModule())
 
         return objectMapper
     }
-
 }

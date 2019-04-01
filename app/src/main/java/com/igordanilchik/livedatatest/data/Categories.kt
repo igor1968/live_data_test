@@ -2,14 +2,13 @@ package com.igordanilchik.livedatatest.data
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-
 data class Categories(
-        @JsonProperty("categories") val categories: List<Category>
+    @JsonProperty("categories") val categories: List<Category>
 ) {
 
     data class Category(
-            @JsonProperty("id") val id: Int,
-            @JsonProperty("name") val name: String,
-            @JsonProperty("pictureUrl") val pictureUrl: String?
+        @JsonProperty("id") val id: Int,
+        @JsonProperty("name") val name: String,
+        @JsonProperty("pictureUrl") val pictureUrl: String?
     )
 }

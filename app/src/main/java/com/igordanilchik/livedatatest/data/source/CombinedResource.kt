@@ -9,9 +9,6 @@ import com.igordanilchik.livedatatest.api.ApiSuccessResponse
 import com.igordanilchik.livedatatest.data.Resource
 
 /**
- * @author Igor Danilchik
- */
-/**
  * A generic class that can provide a resource backed by both the local and remote.
  *
  * @param <ResultType>
@@ -78,9 +75,9 @@ abstract class CombinedResource<ResultType, RequestType> {
         }
     }
 
-    protected open fun onFetchFailed() {}
-
     fun asLiveData() = result as LiveData<Resource<ResultType>>
+
+    protected open fun onFetchFailed() {}
 
     protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
 

@@ -27,9 +27,10 @@ class OffersViewModel @Inject constructor(
     }
 
     fun offers(categoryId: Int): LiveData<Resource<Offers>> =
-        Transformations.map(repository.offers) { playerList ->
+        Transformations.map(repository.offers) { offersList ->
             val filteredList =
-                playerList.data?.offers?.filter { offer -> offer.categoryId == categoryId } ?: emptyList()
-            return@map playerList.copy(data = Offers(filteredList))
+                offersList.data?.offers?.filter { offer -> offer.categoryId == categoryId } ?: emptyList()
+            return@map offersList.copy(data = Offers(filteredList))
         }
+
 }

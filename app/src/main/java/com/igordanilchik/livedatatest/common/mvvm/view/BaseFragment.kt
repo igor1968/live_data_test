@@ -12,7 +12,7 @@ import com.igordanilchik.livedatatest.common.di.ApplicationComponent
 /**
  * @author Igor Danilchik
  */
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
     abstract val layoutResID: Int
 
@@ -43,6 +43,5 @@ abstract class BaseFragment: Fragment() {
                 setTitle(title)
         }
     }
-
 }
 

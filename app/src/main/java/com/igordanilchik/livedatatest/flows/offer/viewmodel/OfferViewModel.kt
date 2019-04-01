@@ -17,7 +17,7 @@ class OfferViewModel @Inject constructor(
 
     fun offer(offerId: Int): LiveData<Resource<Offers.Offer>> =
         Transformations.map(repository.offers) { playerList ->
-            val filteredOffer = playerList.data?.offers?.first { offer -> offer.id == offerId }
+            val filteredOffer = playerList.data?.offers?.firstOrNull { offer -> offer.id == offerId }
             return@map Resource(status = playerList.status, data = filteredOffer, message = playerList.message)
         }
 

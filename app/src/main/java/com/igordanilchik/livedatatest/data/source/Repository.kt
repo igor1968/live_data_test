@@ -21,8 +21,7 @@ class Repository(
     override val categories: LiveData<Resource<Categories>>
         get() = object : CombinedResource<Categories, Catalogue>() {
 
-            override fun saveCallResult(item: Catalogue) =
-                localDataSource.saveCategories(mapper.mapToCategories(item))
+            override fun saveCallResult(item: Catalogue) = localDataSource.saveCategories(mapper.mapToCategories(item))
 
             override fun shouldFetch(data: Categories?) = data?.categories?.isEmpty() == true
 

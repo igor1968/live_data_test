@@ -46,9 +46,9 @@ class DaggerApplication : Application() {
 
     private fun initInjector() {
         appComponent = DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(this))
-                .repositoryModule(RepositoryModule())
-                .build()
+            .applicationModule(ApplicationModule(this))
+            .repositoryModule(RepositoryModule())
+            .build()
     }
 
     /**
@@ -70,5 +70,4 @@ class DaggerApplication : Application() {
             return context?.applicationContext as DaggerApplication
         }
     }
-
 }

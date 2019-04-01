@@ -6,7 +6,7 @@ import com.igordanilchik.livedatatest.flows.catalogue.router.CatalogueRouter
 /**
  * @author Igor Danilchik
  */
-interface CatalogueView: CatalogueRouter {
+interface CatalogueView : CatalogueRouter {
     fun showCategories(categories: Categories)
     fun showProgress()
     fun hideProgress()

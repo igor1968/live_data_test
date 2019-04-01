@@ -9,10 +9,10 @@ import com.igordanilchik.livedatatest.data.Offers
 /**
  * @author Igor Danilchik
  */
-class LocalDataSource(private val preferences: IAppPreferences): ILocalDataSource {
+private const val KEY_CATEGORY = "key_category_"
+private const val KEY_OFFER = "key_offer_"
 
-    private val KEY_CATEGORY = "key_category_"
-    private val KEY_OFFER = "key_offer_"
+class LocalDataSource(private val preferences: IAppPreferences): ILocalDataSource {
 
     private val categories = MutableLiveData<Categories>()
     private val offers = MutableLiveData<Offers>()

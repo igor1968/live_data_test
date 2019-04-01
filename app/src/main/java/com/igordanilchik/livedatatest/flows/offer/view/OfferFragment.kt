@@ -39,6 +39,14 @@ class OfferFragment : BaseFragment(), OfferView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipe_container.setColorSchemeResources(
+            android.R.color.holo_blue_bright,
+            android.R.color.holo_green_light,
+            android.R.color.holo_orange_light,
+            android.R.color.holo_red_light
+        )
+        swipe_container.isEnabled = false
+
         val id = arguments?.let { OfferFragmentArgs.fromBundle(it).offerId } ?: 0
 
         viewModel.offer(id).observe(this, Observer { result ->

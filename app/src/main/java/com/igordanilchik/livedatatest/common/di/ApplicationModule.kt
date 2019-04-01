@@ -27,5 +27,4 @@ class ApplicationModule(val context: Application) {
     @Provides
     @Singleton
     internal fun provideFragmentFactory(): FragmentFactory = FragmentFactory
-
 }
