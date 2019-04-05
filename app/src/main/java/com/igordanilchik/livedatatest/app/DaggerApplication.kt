@@ -3,13 +3,12 @@ package com.igordanilchik.livedatatest.app
 import android.app.Application
 import android.content.Context
 import com.igordanilchik.livedatatest.BuildConfig
-import com.igordanilchik.livedatatest.common.di.ApplicationComponent
-import com.igordanilchik.livedatatest.common.di.ApplicationModule
-import com.igordanilchik.livedatatest.common.di.DaggerApplicationComponent
-import com.igordanilchik.livedatatest.common.di.RepositoryModule
-import com.igordanilchik.livedatatest.common.log.ReleaseTree
+import com.igordanilchik.livedatatest.common.di.common.app.ApplicationComponent
+import com.igordanilchik.livedatatest.common.di.common.app.ApplicationModule
+import com.igordanilchik.livedatatest.common.di.common.app.DaggerApplicationComponent
+import com.igordanilchik.livedatatest.common.log.TimberLogger
+import com.igordanilchik.livedatatest.data.common.logger.CapLogger
 import com.squareup.leakcanary.LeakCanary
-import timber.log.Timber
 
 class DaggerApplication : Application() {
 
@@ -18,9 +17,10 @@ class DaggerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         initInjector()
         initLeakDetection()
-        initTimber()
+        initLogger()
     }
 
     private fun initLeakDetection() {
@@ -47,7 +47,6 @@ class DaggerApplication : Application() {
     private fun initInjector() {
         appComponent = DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
-            .repositoryModule(RepositoryModule())
             .build()
     }
 
@@ -56,12 +55,9 @@ class DaggerApplication : Application() {
      * or Sending Errors as Crashes for Release
      * Pretends as Fail!
      */
-    private fun initTimber() {
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        } else {
-            Timber.plant(ReleaseTree())
-        }
+    private fun initLogger() {
+        CapLogger.setDelegate(TimberLogger())
+        TimberLogger.initTimber(BuildConfig.DEBUG)
     }
 
     companion object {

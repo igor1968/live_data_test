@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.igordanilchik.livedatatest.app.DaggerApplication
-import com.igordanilchik.livedatatest.common.di.ApplicationComponent
+import com.igordanilchik.livedatatest.common.di.common.app.ApplicationComponent
 
 /**
  * @author Igor Danilchik
@@ -38,10 +38,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     protected fun setTitle(title: CharSequence) {
-        activity?.apply {
-            if (!isFinishing)
-                setTitle(title)
-        }
+        activity?.takeIf { !it.isFinishing }?.title = title
     }
 }
 

@@ -1,0 +1,24 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api 'io.reactivex.rxjava2:rxjava:2.1.17'
+
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api('com.squareup.retrofit2:converter-simplexml:2.1.0') {
+        exclude module: 'simple-xml'
+    }
+    api('org.simpleframework:simple-xml:2.7.1') {
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'xpp3', module: 'xpp3'
+    }
+    api "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.6"
+}
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
+

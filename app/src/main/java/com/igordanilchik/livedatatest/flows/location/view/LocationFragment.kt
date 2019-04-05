@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.igordanilchik.livedatatest.R
-import com.igordanilchik.livedatatest.common.di.ViewModelFactory
+import com.igordanilchik.livedatatest.common.di.common.app.ViewModelFactory
 import com.igordanilchik.livedatatest.common.mvvm.view.BaseFragment
 import com.igordanilchik.livedatatest.flows.location.viewmodel.LocationViewModel
 import kotlinx.android.synthetic.main.fragment_location.*

@@ -3,16 +3,16 @@ package com.igordanilchik.livedatatest.flows.catalogue.view
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.igordanilchik.livedatatest.R
-import com.igordanilchik.livedatatest.common.di.ViewModelFactory
+import com.igordanilchik.livedatatest.common.di.common.app.ViewModelFactory
 import com.igordanilchik.livedatatest.common.mvvm.view.BaseFragment
-import com.igordanilchik.livedatatest.data.Categories
-import com.igordanilchik.livedatatest.data.Status
+import com.igordanilchik.livedatatest.data.catalogue.dto.entity.CategoryEntity
+import com.igordanilchik.livedatatest.data.common.Status
+import com.igordanilchik.livedatatest.extensions.injectViewModel
 import com.igordanilchik.livedatatest.flows.catalogue.viewmodel.CatalogueViewModel
 import com.igordanilchik.livedatatest.flows.catalogue.viewmodel.SelectedCategory
 import com.igordanilchik.livedatatest.ui.adapter.CategoriesAdapter
@@ -29,7 +29,7 @@ class CatalogueFragment : BaseFragment(), CatalogueView, CategoriesAdapter.Categ
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProviders.of(this, viewModelFactory).get(CatalogueViewModel::class.java)
+        injectViewModel<CatalogueViewModel>(viewModelFactory)
     }
 
     override val layoutResID = R.layout.fragment_catalogue
@@ -90,11 +90,11 @@ class CatalogueFragment : BaseFragment(), CatalogueView, CategoriesAdapter.Categ
         super.onDestroyView()
     }
 
-    override fun onCategoryClicked(category: Categories.Category) = viewModel.onCategoryClicked(category)
+    override fun onCategoryClicked(category: CategoryEntity) = viewModel.onCategoryClicked(category)
 
-    override fun showCategories(categories: Categories) {
+    override fun showCategories(categories: List<CategoryEntity>) {
         (catalogue_recycler_view.adapter as? CategoriesAdapter)?.apply {
-            appendOrUpdate(categories.categories)
+            appendOrUpdate(categories)
         } ?: run {
             catalogue_recycler_view.adapter = CategoriesAdapter(categories, this)
         }

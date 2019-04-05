@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.igordanilchik.livedatatest.R
 import com.igordanilchik.livedatatest.app.DaggerApplication
-import com.igordanilchik.livedatatest.common.di.ApplicationComponent
+import com.igordanilchik.livedatatest.common.di.common.app.ApplicationComponent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 

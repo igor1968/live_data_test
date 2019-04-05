@@ -3,16 +3,16 @@ package com.igordanilchik.livedatatest.flows.offers.view
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.igordanilchik.livedatatest.R
-import com.igordanilchik.livedatatest.common.di.ViewModelFactory
+import com.igordanilchik.livedatatest.common.di.common.app.ViewModelFactory
 import com.igordanilchik.livedatatest.common.mvvm.view.BaseFragment
-import com.igordanilchik.livedatatest.data.Offers
-import com.igordanilchik.livedatatest.data.Status
+import com.igordanilchik.livedatatest.data.catalogue.dto.entity.OfferEntity
+import com.igordanilchik.livedatatest.data.common.Status
+import com.igordanilchik.livedatatest.extensions.injectViewModel
 import com.igordanilchik.livedatatest.flows.offers.viewmodel.OffersViewModel
 import com.igordanilchik.livedatatest.ui.adapter.OffersAdapter
 import kotlinx.android.synthetic.main.fragment_offers.*
@@ -29,7 +29,7 @@ class OffersFragment : BaseFragment(), OffersView, OffersAdapter.OffersCallback 
     lateinit var viewModelFactory: ViewModelFactory
 
     private val viewModel by lazy(LazyThreadSafetyMode.NONE) {
-        ViewModelProviders.of(this, viewModelFactory).get(OffersViewModel::class.java)
+        injectViewModel<OffersViewModel>(viewModelFactory)
     }
 
     override fun inject() = appComponent().inject(this)
@@ -37,13 +37,18 @@ class OffersFragment : BaseFragment(), OffersView, OffersAdapter.OffersCallback 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val id = arguments?.let { OffersFragmentArgs.fromBundle(it).categoryId } ?: 0
+        val name = arguments?.let { OffersFragmentArgs.fromBundle(it).categoryName }
+
+        name?.let { setTitle(it) }
+
         swipe_container.setColorSchemeResources(
             android.R.color.holo_blue_bright,
             android.R.color.holo_green_light,
             android.R.color.holo_orange_light,
             android.R.color.holo_red_light
         )
-        swipe_container.isEnabled = false
+        swipe_container.setOnRefreshListener { viewModel.onRefresh(id) }
 
         offers_recycler_view.setHasFixedSize(true)
         offers_recycler_view.layoutManager = LinearLayoutManager(activity)
@@ -53,11 +58,6 @@ class OffersFragment : BaseFragment(), OffersView, OffersAdapter.OffersCallback 
                 LinearLayoutManager.VERTICAL
             )
         )
-
-        val id = arguments?.let { OffersFragmentArgs.fromBundle(it).categoryId } ?: 0
-        val name = arguments?.let { OffersFragmentArgs.fromBundle(it).categoryName }
-
-        name?.let { setTitle(it) }
 
         viewModel.offers(id).observe(this, Observer { result ->
             when (result.status) {
@@ -88,11 +88,11 @@ class OffersFragment : BaseFragment(), OffersView, OffersAdapter.OffersCallback 
         super.onDestroyView()
     }
 
-    override fun onOfferClicked(offer: Offers.Offer) = viewModel.onOfferClicked(offer)
+    override fun onOfferClicked(offer: OfferEntity) = viewModel.onOfferClicked(offer)
 
-    override fun showOffers(offers: Offers) {
+    override fun showOffers(offers: List<OfferEntity>) {
         (offers_recycler_view.adapter as? OffersAdapter)?.apply {
-            appendOrUpdate(offers.offers)
+            appendOrUpdate(offers)
         } ?: run {
             offers_recycler_view.adapter = OffersAdapter(offers, this)
         }

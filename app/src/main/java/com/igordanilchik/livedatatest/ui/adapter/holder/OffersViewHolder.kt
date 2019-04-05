@@ -8,8 +8,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.igordanilchik.livedatatest.R
-import com.igordanilchik.livedatatest.data.Offers
-import com.igordanilchik.livedatatest.data.getParamByKey
+import com.igordanilchik.livedatatest.data.catalogue.dto.entity.OfferEntity
+import com.igordanilchik.livedatatest.data.catalogue.dto.entity.getParamByKey
 import com.igordanilchik.livedatatest.ui.adapter.OffersAdapter
 import com.igordanilchik.livedatatest.ui.base.adapter.holder.BaseViewHolder
 import kotlinx.android.synthetic.main.offers_item.*
@@ -21,13 +21,13 @@ class OffersViewHolder(
     containerView: View,
     parentDelegate: MvpDelegate<*>?,
     callback: OffersAdapter.OffersCallback?
-) : BaseViewHolder<Offers.Offer, OffersAdapter.OffersCallback>(
+) : BaseViewHolder<OfferEntity, OffersAdapter.OffersCallback>(
     containerView,
     parentDelegate,
     callback
 ) {
 
-    override fun render(item: Offers.Offer) {
+    override fun render(item: OfferEntity) {
         itemView.setOnClickListener { callback?.onOfferClicked(item) }
 
         offer_name.text = item.name
@@ -44,7 +44,7 @@ class OffersViewHolder(
             .diskCacheStrategy(DiskCacheStrategy.ALL)
 
         Glide.with(itemView.context)
-            .load(item.picture)
+            .load(item.pictureUrl)
             .apply(options)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(offer_image)

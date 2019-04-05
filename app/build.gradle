@@ -35,62 +35,68 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
-    implementation "android.arch.lifecycle:extensions:1.1.1"
+    api "android.arch.lifecycle:extensions:1.1.1"
 
 
-    implementation 'androidx.annotation:annotation:1.0.2'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
-    implementation 'com.google.android.material:material:1.1.0-alpha05'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha03'
-    implementation 'androidx.cardview:cardview:1.0.0'
+    api 'androidx.annotation:annotation:1.0.2'
+    api 'androidx.appcompat:appcompat:1.1.0-alpha03'
+    api 'com.google.android.material:material:1.1.0-alpha05'
+    api 'androidx.recyclerview:recyclerview:1.1.0-alpha03'
+    api 'androidx.cardview:cardview:1.0.0'
 
-    implementation "android.arch.navigation:navigation-common-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-runtime-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+    api "android.arch.navigation:navigation-common-ktx:1.0.0"
+    api "android.arch.navigation:navigation-runtime-ktx:1.0.0"
+    api "android.arch.navigation:navigation-fragment-ktx:1.0.0"
+    api "android.arch.navigation:navigation-ui-ktx:1.0.0"
 
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation('com.squareup.retrofit2:converter-simplexml:2.1.0') {
+    api 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    api 'io.reactivex.rxjava2:rxjava:2.1.17'
+
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api('com.squareup.retrofit2:converter-simplexml:2.1.0') {
         exclude module: 'simple-xml'
     }
-    implementation('org.simpleframework:simple-xml:2.7.1') {
+
+    api('org.simpleframework:simple-xml:2.7.1') {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'xpp3', module: 'xpp3'
     }
-    implementation 'com.dmitrymalkovich.android:material-design-dimens:1.2'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.0'
+    api 'com.dmitrymalkovich.android:material-design-dimens:1.2'
+    api 'com.github.bumptech.glide:glide:4.8.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.14.0'
 
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    api 'com.google.android.gms:play-services-maps:16.1.0'
+    api 'com.google.android.gms:play-services-location:16.0.0'
 
-    implementation 'com.google.dagger:dagger:2.16'
+    api 'com.google.dagger:dagger:2.16'
 
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.6"
+    api "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.6"
 
     compileOnly 'javax.annotation:jsr250-api:1.0'
 
     kapt 'com.google.dagger:dagger-compiler:2.16'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'com.arello-mobile:moxy:1.5.5'
-    implementation 'com.arello-mobile:moxy-app-compat:1.5.5'
+    api 'com.arello-mobile:moxy:1.5.5'
+    api 'com.arello-mobile:moxy-app-compat:1.5.5'
     kapt 'com.arello-mobile:moxy-compiler:1.5.5'
 
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    api 'com.jakewharton.timber:timber:4.7.1'
 
-    implementation 'com.github.florent37:runtime-permission:1.1.0'
-    implementation 'com.github.florent37:runtime-permission-kotlin:1.1.0'
+    api 'com.github.florent37:runtime-permission:1.1.0'
+    api 'com.github.florent37:runtime-permission-kotlin:1.1.0'
+    compile project(path: ':data')
 }
 
 android {
@@ -101,5 +107,4 @@ android {
 repositories {
     mavenCentral()
     google()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 }

@@ -6,7 +6,6 @@ import timber.log.Timber
  * @author Igor Danilchik
  */
 
-
 class ReleaseTree : Timber.DebugTree() {
 
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
