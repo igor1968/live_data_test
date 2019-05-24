@@ -46,9 +46,9 @@ dependencies {
 
 
     api 'androidx.annotation:annotation:1.0.2'
-    api 'androidx.appcompat:appcompat:1.1.0-alpha03'
-    api 'com.google.android.material:material:1.1.0-alpha05'
-    api 'androidx.recyclerview:recyclerview:1.1.0-alpha03'
+    api 'androidx.appcompat:appcompat:1.1.0-alpha05'
+    api 'com.google.android.material:material:1.1.0-alpha06'
+    api 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
     api 'androidx.cardview:cardview:1.0.0'
 
     api "android.arch.navigation:navigation-common-ktx:1.0.0"
@@ -59,7 +59,7 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     api 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    api 'io.reactivex.rxjava2:rxjava:2.1.17'
+    api 'io.reactivex.rxjava2:rxjava:2.2.8'
 
     api 'com.squareup.retrofit2:retrofit:2.5.0'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
@@ -71,20 +71,20 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'xpp3', module: 'xpp3'
     }
-    api 'com.dmitrymalkovich.android:material-design-dimens:1.2'
-    api 'com.github.bumptech.glide:glide:4.8.0'
-    api 'com.squareup.okhttp3:logging-interceptor:3.14.0'
+    api 'com.dmitrymalkovich.android:material-design-dimens:1.4'
+    api 'com.github.bumptech.glide:glide:4.9.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.14.2'
 
     api 'com.google.android.gms:play-services-maps:16.1.0'
     api 'com.google.android.gms:play-services-location:16.0.0'
 
-    api 'com.google.dagger:dagger:2.16'
+    api 'com.google.dagger:dagger:2.22.1'
 
-    api "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.6"
+    api "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
 
     compileOnly 'javax.annotation:jsr250-api:1.0'
 
-    kapt 'com.google.dagger:dagger-compiler:2.16'
+    kapt 'com.google.dagger:dagger-compiler:2.22.1'
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -96,7 +96,8 @@ dependencies {
 
     api 'com.github.florent37:runtime-permission:1.1.0'
     api 'com.github.florent37:runtime-permission-kotlin:1.1.0'
-    compile project(path: ':data')
+
+    api project(path: ':data')
 }
 
 android {
